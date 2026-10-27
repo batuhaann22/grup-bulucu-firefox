@@ -2,22 +2,48 @@
 <html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Grup Bulucu — Firefox</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mu:#5b6475;--ac:#2f6fed}
-@media (prefers-color-scheme:dark){:root{--bg:#15171c;--card:#1f232b;--tx:#e8eaef;--mu:#9aa3b2;--ac:#6c9bff}}
+:root{--bg:#f6f7f9;--card:#fff;--tx:#1d2330;--mu:#5b6475;--ac:#2f6fed;--ln:#dfe3ea}
+@media (prefers-color-scheme:dark){:root{--bg:#15171c;--card:#1f232b;--tx:#e8eaef;--mu:#9aa3b2;--ac:#6c9bff;--ln:#343a46}}
+*{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:620px;margin:48px auto;padding:0 16px}
+main{width:100%;max-width:620px;margin:48px auto;padding:0 16px}
 .card{background:var(--card);border-radius:14px;padding:28px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 h1{font-size:24px;margin:0 0 4px}.v{color:var(--mu);margin:0 0 20px}
+.lang{display:inline-flex;border:1px solid var(--ln);border-radius:8px;overflow:hidden;flex-shrink:0}
+.lang button{background:none;border:0;color:var(--mu);font:600 13px system-ui,sans-serif;padding:6px 10px;cursor:pointer}
+.lang button.on{background:var(--ac);color:#fff}
 a.btn{display:inline-block;background:var(--ac);color:#fff;text-decoration:none;padding:12px 22px;border-radius:10px;font-weight:600}
 ol{padding-left:20px;color:var(--mu)}li{margin:6px 0}code{font-size:14px}
+[data-l]{display:none}
+html[lang=tr] [data-l=tr],html[lang=en] [data-l=en]{display:revert}
 </style></head><body><main><div class="card">
-<h1>Grup Bulucu — Group Finder</h1>
-<p class="v">Firefox · sürüm 1.0.1</p>
-<p><a class="btn" href="grup-bulucu-firefox-1.0.1.xpi">Firefox'a ekle</a></p>
-<ol>
+<div class="top">
+  <div><h1>Grup Bulucu — Group Finder</h1>
+  <p class="v">Firefox · <span data-l="tr">sürüm</span><span data-l="en">version</span> 1.0.1</p></div>
+  <div class="lang" role="group" aria-label="Language"><button type="button" data-set="tr">TR</button><button type="button" data-set="en">EN</button></div>
+</div>
+<p><a class="btn" href="grup-bulucu-firefox-1.0.1.xpi"><span data-l="tr">Firefox'a ekle</span><span data-l="en">Add to Firefox</span></a></p>
+<ol data-l="tr">
 <li>Butona Firefox'ta tıklayın. Firefox "bu siteye izin ver" diye sorarsa <b>Devam et / İzin ver</b>, sonra <b>Ekle</b>.</li>
 <li>Dosya indiyse: Firefox penceresine sürükleyin ya da <code>about:addons</code> → ⚙ → <b>Dosyadan eklenti yükle</b>.</li>
 <li>Güncellemeler otomatik gelir.</li>
 </ol>
-<p class="v">Chrome kullanıyorsanız Chrome Web Store linkini kullanın.</p>
-</div></main></body></html>
+<ol data-l="en">
+<li>Click the button in Firefox. If Firefox asks to allow this site, choose <b>Continue / Allow</b>, then <b>Add</b>.</li>
+<li>If the file was downloaded instead: drag it onto a Firefox window, or open <code>about:addons</code> → ⚙ → <b>Install Add-on From File</b>.</li>
+<li>Updates arrive automatically.</li>
+</ol>
+<p class="v"><span data-l="tr">Chrome kullanıyorsanız Chrome Web Store linkini kullanın.</span><span data-l="en">On Chrome, use the Chrome Web Store link instead.</span></p>
+</div></main>
+<script>
+(function(){
+  var saved=null; try{saved=localStorage.getItem("gbLang")}catch(e){}
+  function set(l,keep){document.documentElement.lang=l;
+    document.querySelectorAll("[data-set]").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-set")===l)});
+    if(keep){try{localStorage.setItem("gbLang",l)}catch(e){}}}
+  set(saved||(/^tr/i.test(navigator.language||"")?"tr":"en"),false);
+  document.querySelectorAll("[data-set]").forEach(function(b){b.addEventListener("click",function(){set(b.getAttribute("data-set"),true)})});
+})();
+</script>
+</body></html>
