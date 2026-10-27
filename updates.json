@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "grup-bulucu@group-finder": {
+      "updates": [
+        {
+          "version": "1.0.1",
+          "update_link": "https://batuhaann22.github.io/grup-bulucu-firefox/grup-bulucu-firefox-1.0.1.xpi"
+        }
+      ]
+    }
+  }
+}
